@@ -2,194 +2,257 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Vatsal | 3D Glass Portfolio</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vatsal Varma</title>
 
 <style>
 :root {
-  --bg: #0a0f1a;
-  --glass: rgba(255,255,255,0.12);
-  --border: rgba(255,255,255,0.25);
-  --accent: #38bdf8;
-  --text: #e5e7eb;
+  --bg: #000;
+  --text: #fff;
+  --glass: rgba(255,255,255,0.15);
+  --accent: orange;
+}
+
+.light {
+  --bg: #f4f4f4;
+  --text: #111;
+  --glass: rgba(255,255,255,0.6);
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Inter", sans-serif;
-}
-
-body {
-  background: linear-gradient(120deg, #020617, #0f172a);
-  color: var(--text);
+  font-family: "Poppins", sans-serif;
   scroll-behavior: smooth;
 }
 
-/* ===== HEADER ===== */
-header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  padding: 1rem 2rem;
-  background: rgba(0,0,0,0.6);
-  backdrop-filter: blur(10px);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 1000;
-}
-header h1 { font-size: 1.7rem; }
-nav button {
-  background: none;
-  border: none;
+body {
+  background: var(--bg);
   color: var(--text);
-  margin-left: 1rem;
-  cursor: pointer;
-  font-size: 0.95rem;
-  transition: 0.3s;
 }
-nav button:hover { color: var(--accent); }
 
-/* ===== HERO ===== */
-.hero {
-  height: 100vh;
-  display: grid;
-  place-items: center;
-  text-align: center;
-  padding-top: 4rem;
+/* BACKGROUND */
+.section {
+  min-height: 100vh;
+  padding-left: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
-.hero h1 {
-  font-size: clamp(2.8rem, 6vw, 5rem);
-  background: linear-gradient(90deg, white, var(--accent));
-  -webkit-background-clip: text;
-  color: transparent;
-  animation: glow 3s ease infinite alternate;
+
+.section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.45);
+  z-index: -1;
 }
-.hero p {
-  margin-top: 1rem;
+
+#home::before { background-image: url("From KlickPin CF Pin en Hình nền điện thoại"); }
+#about::before { background-image: url("nfs-need-for-speed.gif"); }
+#explore::before { background-image: url("nfs-hot-pureuit-game.gif"); }
+#cars::before { background-image: url("nnn.gif.gif"); }
+#contact::before { background-image: url("need-for-speed-need-for-speed-2015.gif"); }
+
+/* SIDEBAR */
+nav {
+  position: fixed;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--glass);
+  backdrop-filter: blur(15px);
+  padding: 25px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  z-index: 100;
+}
+
+nav a {
+  color: var(--text);
+  text-decoration: none;
   font-size: 1.1rem;
-  opacity: 0.85;
-}
-@keyframes glow {
-  from { text-shadow: 0 0 10px var(--accent); }
-  to { text-shadow: 0 0 40px var(--accent); }
 }
 
-/* ===== SECTIONS ===== */
-section {
-  padding: 5rem 4vw;
-}
-.section-title {
-  font-size: 2.3rem;
-  margin-bottom: 2rem;
+nav a:hover {
+  color: var(--accent);
 }
 
-/* ===== GLASS CARDS ===== */
+/* HOME */
+.home-content {
+  max-width: 600px;
+}
+
+.home-content h1 {
+  font-size: 4rem;
+}
+
+.name {
+  color: orange;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0); }
+}
+
+.home-content p {
+  margin-top: 15px;
+  font-size: 1.3rem;
+}
+
+/* GLASS BOX */
+.glass {
+  background: var(--glass);
+  padding: 50px;
+  border-radius: 25px;
+  backdrop-filter: blur(15px);
+  text-align: center;
+}
+
+/* GRID */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
+  gap: 20px;
+  margin-top: 30px;
 }
+
 .card {
-  background: var(--glass);
-  border: 1px solid var(--border);
-  backdrop-filter: blur(12px);
-  border-radius: 14px;
-  padding: 1.8rem;
-  transition: transform 0.4s, box-shadow 0.4s;
+  padding: 25px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.15);
+  cursor: pointer;
+  transition: 0.3s;
 }
+
 .card:hover {
-  transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 20px 35px rgba(56,189,248,0.25);
-}
-.card h3 { margin-bottom: 0.5rem; }
-.card p { opacity: 0.85; font-size: 0.95rem; }
-
-/* ===== SECTION REVEAL ===== */
-.reveal {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.8s ease;
-}
-.reveal.show {
-  opacity: 1;
-  transform: translateY(0px);
+  transform: scale(1.05);
+  background: rgba(255,165,0,0.3);
 }
 
-/* ===== FOOTER ===== */
-footer {
-  padding: 2rem 1rem;
-  text-align: center;
-  background: rgba(0,0,0,0.5);
+/* BUTTONS */
+.btn {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 25px;
+  background: var(--glass);
+  color: var(--text);
+  cursor: pointer;
+  margin-top: 20px;
 }
-footer a {
-  color: var(--accent);
-  margin: 0 1rem;
-  text-decoration: none;
-  font-weight: bold;
+
+/* MOBILE */
+.menu-btn {
+  display: none;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  font-size: 30px;
+  z-index: 999;
+}
+
+@media(max-width: 800px){
+  .section { padding-left: 20px; }
+  nav { display: none; }
+  .menu-btn { display: block; }
 }
 </style>
 </head>
 
 <body>
 
-<header>
-  <h1>Vatsal Varma</h1>
-  <nav>
-    <button onclick="scrollTo('showcase')">Showcase</button>
-    <button onclick="scrollTo('about')">About</button>
-    <button onclick="scrollTo('contact')">Contact</button>
-  </nav>
-</header>
+<div class="menu-btn" onclick="toggleMenu()">☰</div>
 
-<div class="hero">
-  <div>
-    <h1>Glass Portfolio</h1>
-    <p>Interactive, sleek, GitHub Pages ready.</p>
+<nav id="sidebar">
+  <a href="#home">Home</a>
+  <a href="#about">About</a>
+  <a href="#explore">Explore</a>
+  <a href="#cars">Cars</a>
+  <a href="#contact">Contact</a>
+  <button class="btn" onclick="toggleTheme()">🌗 Theme</button>
+</nav>
+
+<section id="home" class="section">
+  <div class="home-content">
+    <h1>Hi, I'm <span class="name">Vatsal Varma</span></h1>
+    <p>A web developer creating webpages for fun.</p>
+    <button class="btn" onclick="toggleMusic()" id="musicBtn">▶ Play Music</button>
   </div>
-</div>
+</section>
 
-<section id="showcase">
-  <h2 class="section-title reveal">Project Showcase</h2>
-  <div class="grid">
-    <div class="card reveal">
-      <h3>3D Vision Demo</h3>
-      <p>A stylish interactive UI with smooth animations.</p>
-    </div>
-    <div class="card reveal">
-      <h3>Web Animations</h3>
-      <p>Smooth scroll and hover effects for modern web UX.</p>
-    </div>
-    <div class="card reveal">
-      <h3>Responsive Layout</h3>
-      <p>Supports all screen sizes on web.</p>
+<section id="about" class="section">
+  <div class="glass">
+    <h2>About Me</h2>
+    <p>I love designing interactive websites and creative UI experiences.</p>
+  </div>
+</section>
+
+<section id="explore" class="section">
+  <div class="glass">
+    <h2>Games</h2>
+    <div class="grid">
+      <div class="card">NFS - HOT PERSUITE</div>
+      <div class="card">NFS - MOSTWANTED</div>
+      <div class="card">NFS - HEAT</div>
+      <div class="card">NFS - PAYBACK</div>
     </div>
   </div>
 </section>
 
-<section id="about">
-  <h2 class="section-title reveal">About Me</h2>
-  <p class="reveal">I build modern frontend experiences ready for production deployment on GitHub Pages and beyond.</p>
+<section id="cars" class="section">
+  <div class="glass">
+    <h2>Cars</h2>
+    <div class="grid">
+      <div class="card">Silver BMW</div>
+      <div class="card">Chevy C8</div>
+      <div class="card">Skyline</div>
+      <div class="card">GTR</div>
+    </div>
+  </div>
 </section>
 
-<footer id="contact">
-  <p>Connect with me:</p>
-  <a href="https://github.com/vatsalvarma" target="_blank">GitHub</a>
-  <a href="https://www.linkedin.com/in/vatsal-varma-2bb681294/" target="_blank">LinkedIn</a>
-</footer>
+<section id="contact" class="section">
+  <div class="glass">
+    <h2>Contact</h2>
+    <p>📧 <a class="section-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=gamesvatsal99@gmail.com" target="_blank" style="color:orange">gamesvatsal99@gmail.com</a></p>
+    <p>🌐 <a href="https://github.com/vatsalvarma" target="_blank" style="color:orange">github.com/vatsalvarma</a></p>
+    <p>ℹ️ <a class="section-link" href="https://www.linkedin.com/in/vatsal-varma-2bb681294/" target="_blank" style="color:orange">Linkedin</a></p>
+  </div>
+</section>
+
+<audio id="bgMusic" loop>
+  <source src="Icona Pop - I Love It(001)I Love It (feat. Char.mp3" type="audio/mpeg">
+</audio>
 
 <script>
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) entry.target.classList.add("show");
-  });
-}, { threshold: 0.2 });
-document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+const music = document.getElementById("bgMusic");
+const musicBtn = document.getElementById("musicBtn");
 
-function scrollTo(id) {
-  document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+function toggleMusic() {
+  if (music.paused) {
+    music.play();
+    musicBtn.innerText = "⏸ Pause Music";
+  } else {
+    music.pause();
+    musicBtn.innerText = "▶ Play Music";
+  }
+}
+
+function toggleTheme() {
+  document.body.classList.toggle("light");
+}
+
+function toggleMenu() {
+  document.getElementById("sidebar").classList.toggle("show");
 }
 </script>
 
