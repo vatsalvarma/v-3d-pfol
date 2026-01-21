@@ -2,257 +2,237 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<title>Auth UI – Smooth Animated Form</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vatsal Varma</title>
 
 <style>
 :root {
-  --bg: #000;
-  --text: #fff;
-  --glass: rgba(255,255,255,0.15);
-  --accent: orange;
-}
-
-.light {
-  --bg: #f4f4f4;
-  --text: #111;
-  --glass: rgba(255,255,255,0.6);
+  --primary: #7c7cff;
+  --secondary: #00f5d4;
+  --bg-dark: #0b0f1a;
+  --glass: rgba(255,255,255,0.08);
+  --border: rgba(255,255,255,0.15);
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-  scroll-behavior: smooth;
+  font-family: 'Segoe UI', sans-serif;
 }
 
 body {
-  background: var(--bg);
-  color: var(--text);
-}
-
-/* BACKGROUND */
-.section {
   min-height: 100vh;
-  padding-left: 260px;
+  background: radial-gradient(circle at top, #1b1f3b, #05070f);
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #fff;
+}
+
+/* ===== Card ===== */
+.auth-card {
+  width: 380px;
+  backdrop-filter: blur(20px);
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 40px 30px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+  overflow: hidden;
   position: relative;
 }
 
-.section::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  filter: brightness(0.45);
-  z-index: -1;
-}
-
-#home::before { background-image: url("From KlickPin CF Pin en Hình nền điện thoại.mp4"); }
-#about::before { background-image: url("nfs-need-for-speed.gif"); }
-#explore::before { background-image: url("nfs-hot-pureuit-game.gif"); }
-#cars::before { background-image: url("nnn.gif.gif"); }
-#contact::before { background-image: url("need-for-speed-need-for-speed-2015.gif"); }
-
-/* SIDEBAR */
-nav {
-  position: fixed;
-  left: 15px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: var(--glass);
-  backdrop-filter: blur(15px);
-  padding: 25px;
-  border-radius: 20px;
+/* ===== Tabs ===== */
+.tabs {
   display: flex;
-  flex-direction: column;
-  gap: 15px;
-  z-index: 100;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  position: relative;
 }
 
-nav a {
-  color: var(--text);
-  text-decoration: none;
-  font-size: 1.1rem;
-}
-
-nav a:hover {
-  color: var(--accent);
-}
-
-/* HOME */
-.home-content {
-  max-width: 600px;
-}
-
-.home-content h1 {
-  font-size: 4rem;
-}
-
-.name {
-  color: orange;
-  animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
-  100% { transform: translateY(0); }
-}
-
-.home-content p {
-  margin-top: 15px;
-  font-size: 1.3rem;
-}
-
-/* GLASS BOX */
-.glass {
-  background: var(--glass);
-  padding: 50px;
-  border-radius: 25px;
-  backdrop-filter: blur(15px);
-  text-align: center;
-}
-
-/* GRID */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
-  gap: 20px;
-  margin-top: 30px;
-}
-
-.card {
-  padding: 25px;
-  border-radius: 20px;
-  background: rgba(255,255,255,0.15);
+.tabs button {
+  flex: 1;
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 18px;
+  padding: 10px;
   cursor: pointer;
   transition: 0.3s;
 }
 
-.card:hover {
-  transform: scale(1.05);
-  background: rgba(255,165,0,0.3);
+.tabs button.active {
+  color: #fff;
 }
 
-/* BUTTONS */
-.btn {
-  padding: 12px 30px;
+.tab-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  border-radius: 10px;
+  transition: transform 0.4s ease;
+}
+
+/* ===== Forms ===== */
+.forms {
+  display: flex;
+  width: 200%;
+  transition: transform 0.5s ease;
+}
+
+form {
+  width: 50%;
+}
+
+/* ===== Input ===== */
+.input-group {
+  position: relative;
+  margin-bottom: 25px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 14px 12px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 16px;
+  outline: none;
+}
+
+.input-group label {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: #aaa;
+  pointer-events: none;
+  transition: 0.3s;
+  background: transparent;
+}
+
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label {
+  top: -7px;
+  font-size: 12px;
+  background: var(--bg-dark);
+  padding: 0 6px;
+  color: var(--secondary);
+}
+
+/* ===== Button ===== */
+.auth-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
   border: none;
-  border-radius: 25px;
-  background: var(--glass);
-  color: var(--text);
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #000;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.auth-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0,245,212,0.4);
+}
+
+/* ===== Footer ===== */
+.footer-text {
+  text-align: center;
   margin-top: 20px;
+  font-size: 13px;
+  color: #aaa;
 }
 
-/* MOBILE */
-.menu-btn {
-  display: none;
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  font-size: 30px;
-  z-index: 999;
+.footer-text a {
+  color: var(--secondary);
+  text-decoration: none;
 }
 
-@media(max-width: 800px){
-  .section { padding-left: 20px; }
-  nav { display: none; }
-  .menu-btn { display: block; }
+/* ===== Mobile ===== */
+@media (max-width: 420px) {
+  .auth-card {
+    width: 92%;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="menu-btn" onclick="toggleMenu()">☰</div>
-
-<nav id="sidebar">
-  <a href="#home">Home</a>
-  <a href="#about">About</a>
-  <a href="#explore">Explore</a>
-  <a href="#cars">Cars</a>
-  <a href="#contact">Contact</a>
-  <button class="btn" onclick="toggleTheme()">🌗 Theme</button>
-</nav>
-
-<section id="home" class="section">
-  <div class="home-content">
-    <h1>Hi, I'm <span class="name">Vatsal Varma</span></h1>
-    <p>A web developer creating webpages for fun.</p>
-    <button class="btn" onclick="toggleMusic()" id="musicBtn">▶ Play Music</button>
+<div class="auth-card">
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab(0)">Login</button>
+    <button class="tab-btn" onclick="switchTab(1)">Register</button>
+    <div class="tab-indicator"></div>
   </div>
-</section>
 
-<section id="about" class="section">
-  <div class="glass">
-    <h2>About Me</h2>
-    <p>I love designing interactive websites and creative UI experiences.</p>
+  <div class="forms">
+    <!-- Login -->
+    <form>
+      <div class="input-group">
+        <input type="email" required placeholder=" ">
+        <label>Email</label>
+      </div>
+
+      <div class="input-group">
+        <input type="password" required placeholder=" ">
+        <label>Password</label>
+      </div>
+
+      <button class="auth-btn">Login</button>
+
+      <div class="footer-text">
+        Forgot password? <a href="#">Reset</a>
+      </div>
+    </form>
+
+    <!-- Register -->
+    <form>
+      <div class="input-group">
+        <input type="text" required placeholder=" ">
+        <label>Full Name</label>
+      </div>
+
+      <div class="input-group">
+        <input type="email" required placeholder=" ">
+        <label>Email</label>
+      </div>
+
+      <div class="input-group">
+        <input type="password" required placeholder=" ">
+        <label>Password</label>
+      </div>
+
+      <button class="auth-btn">Create Account</button>
+
+      <div class="footer-text">
+        By signing up you agree to our <a href="#">Terms</a>
+      </div>
+    </form>
   </div>
-</section>
-
-<section id="explore" class="section">
-  <div class="glass">
-    <h2>Games</h2>
-    <div class="grid">
-      <div class="card">NFS - HOT PERSUITE</div>
-      <div class="card">NFS - MOSTWANTED</div>
-      <div class="card">NFS - HEAT</div>
-      <div class="card">NFS - PAYBACK</div>
-    </div>
-  </div>
-</section>
-
-<section id="cars" class="section">
-  <div class="glass">
-    <h2>Cars</h2>
-    <div class="grid">
-      <div class="card">Silver BMW</div>
-      <div class="card">Chevy C8</div>
-      <div class="card">Skyline</div>
-      <div class="card">GTR</div>
-    </div>
-  </div>
-</section>
-
-<section id="contact" class="section">
-  <div class="glass">
-    <h2>Contact</h2>
-    <p>📧 <a class="section-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=gamesvatsal99@gmail.com" target="_blank" style="color:orange">gamesvatsal99@gmail.com</a></p>
-    <p>🌐 <a href="https://github.com/vatsalvarma" target="_blank" style="color:orange">github.com/vatsalvarma</a></p>
-    <p>ℹ️ <a class="section-link" href="https://www.linkedin.com/in/vatsal-varma-2bb681294/" target="_blank" style="color:orange">Linkedin</a></p>
-  </div>
-</section>
-
-<audio id="bgMusic" loop>
-  <source src="Icona Pop - I Love It(001)I Love It (feat. Char.mp3" type="audio/mpeg">
-</audio>
+</div>
 
 <script>
-const music = document.getElementById("bgMusic");
-const musicBtn = document.getElementById("musicBtn");
+const forms = document.querySelector('.forms');
+const indicator = document.querySelector('.tab-indicator');
+const buttons = document.querySelectorAll('.tab-btn');
 
-function toggleMusic() {
-  if (music.paused) {
-    music.play();
-    musicBtn.innerText = "⏸ Pause Music";
-  } else {
-    music.pause();
-    musicBtn.innerText = "▶ Play Music";
-  }
-}
+function switchTab(index) {
+  forms.style.transform = `translateX(-${index * 50}%)`;
+  indicator.style.transform = `translateX(${index * 100}%)`;
 
-function toggleTheme() {
-  document.body.classList.toggle("light");
-}
-
-function toggleMenu() {
-  document.getElementById("sidebar").classList.toggle("show");
+  buttons.forEach(btn => btn.classList.remove('active'));
+  buttons[index].classList.add('active');
 }
 </script>
 
